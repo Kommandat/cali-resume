@@ -1,0 +1,266 @@
+% resume.tex
+% vim:set ft=tex spell:
+
+% AUTHOR: Lakshay Akula
+% Date last modified: 02/24/2016
+% Description: A simple (and very hacky) LaTeX resume.
+% It definitely does not use good LaTeX coding principles.
+% That being said, it works and looks great in my opinion.
+% It's intended for an American-style one-page resume.
+% Go knock yourself out. It's very easy to modify and have
+% fun with. My only request is that you credit me somewhere.
+
+% Set up font and page size
+\documentclass[11pt,letterpaper]{article}
+% Set up margins
+\usepackage[letterpaper,margin=0.75in]{geometry}
+
+% Other misc. packages
+\usepackage{mdwlist}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\pagestyle{empty}
+\setlength{\tabcolsep}{0em}
+\usepackage{setspace}
+\usepackage{array}
+
+% Tables with multiple rows
+\usepackage{multirow}
+
+% Tables with "stretch" width
+\usepackage{tabularx}
+\newcolumntype{R}{>{\centering\arraybackslash}X}
+
+% Setting default font to TeX Gyre Hero
+\usepackage{tgheros}
+\renewcommand*\familydefault{\sfdefault}
+
+% Provides a nicer C++
+\newcommand{\CPP}
+{C\nolinebreak[4]\hspace{-.05em}\raisebox{.22ex}{\footnotesize\bf ++}}
+
+% url typesetting for links
+\usepackage{url}
+
+% Command: school
+% Usage  : \school{school}{location}{date}{degree}
+\newcommand{\school}[4]
+{
+\noindent
+\begin{tabularx}{\textwidth}{lXr}
+{\textbf{#1} - {#2}}           & & { #3} \\
+ \textbf{#4} & &
+\end{tabularx}
+}
+
+% Command: entry
+% Usage  : \entry{title}{company}{location}{date}
+\newcommand{\entry}[4]
+{
+\noindent
+\begin{tabularx}{\textwidth}{lXr}
+{\textit{#1}, \textbf{#2} - {#3}}           & & { #4} 
+\end{tabularx}
+}
+
+% Command: educ
+% Usage  : \educ{college}{degree}{location}{date}
+\newcommand{\educ}[4]
+{
+\noindent
+\begin{tabularx}{\textwidth}{lXr}
+{\textbf{#1} {- #3}}           & & { #4} \\
+\textit{#2} & & 
+\end{tabularx}
+}
+
+% Command: shortentry
+% Usage  : \shortentry{title}{company}{date}
+\newcommand{\shortentry}[3]
+{
+\noindent
+\begin{tabularx}{\textwidth}{lXr}
+{\textit{#1}, \textbf{#2}}           & & { #3} 
+\end{tabularx}
+}
+
+% Command: shorterentry
+% Usage  : \shorterentry{title}{date}
+\newcommand{\shorterentry}[3][\textwidth]
+{
+\noindent
+\begin{tabularx}{#1}{lXr}
+{\textbf{#2}}           & & { #3} 
+\end{tabularx}
+}
+
+% Command: courses
+% Usage  : \courses{course1}{course2}...{lastcourse}
+% NOTE   : Manually change the number of courses and format when needed
+\newcommand{\courses}[8]
+{
+\noindent
+\begin{tabularx}{\textwidth}{RRRR}
+#1 & #2 & #3 & #4 \\
+#5 & #6 & #7 & #8 
+\end{tabularx}
+}
+
+
+%%
+% We have three choices for header. Try them all out. The \largeheader
+% uses larger font. Lastly, \newheader does not include an address.
+%%
+
+% Command: header
+% Usage  : \header{name}{crap1}{crap2}...{crap6}
+% NOTE   : Manually change the number of crap and format when needed
+
+\newcommand{\header}[7]
+{
+\noindent
+\begin{tabularx}{\textwidth}{cXrrr}
+\multirow{2}{*}{\huge \textbf{#1} \hspace{0.25em}} &  & {\small #2} \hspace{1.0em} & {\small #3}  \hspace{1.0em} & {\small \url{#4}} \\
+                                                  &  & {\small #5} \hspace{1.0em} & {\small #6}  \hspace{1.0em} & {\small \url{#7}}
+\end{tabularx}
+}
+
+
+\newcommand{\largeheader}[7]
+{
+\noindent
+\begin{tabularx}{\textwidth}{lXrr}
+\multirow{2}{*}{\Huge \textbf{#1} \hspace{0.25em}} &  & {\normalsize #2} \hspace{1.0em} & {\normalsize #3}  \hspace{1.0em} \\
+                                                   &  & {\normalsize #4} \hspace{1.0em} & {\normalsize #5}  \hspace{1.0em} \\
+                                                   &  & {\normalsize #6} \hspace{1.0em} & {\normalsize #7}  \hspace{1.0em}
+\end{tabularx}
+}
+
+%%
+% newheader 
+%%
+\newcommand{\newheader}[5]
+{
+\noindent
+\begin{tabularx}{\textwidth}{lXrr}
+\multirow{2}{*}{\Huge \textbf{#1} \hspace{0.25em}} &  & {\normalsize #2} \hspace{1.0em} & {\normalsize #3}  \hspace{1.0em} \\
+                                                   &  & {\normalsize #4} \hspace{1.0em} & {\normalsize #5}  \hspace{1.0em}
+\end{tabularx}
+}
+
+
+% Command: head
+% Usage  : \head{Label Name}
+\newcommand{\head}[1]
+{
+\noindent
+\begin{tabularx}{\textwidth}{cX}
+\multirow{2}{*}{\textsc{\Large #1 \hspace{0.25em}}} &  \\ \cline{2-2} 
+                                                 & 
+\end{tabularx} \vspace{0.5em}
+}
+
+% Command: threeitem
+% Usage  : \threeitem{crap1}{crap2}{crap3}
+\newcommand{\threeitem}[3]
+{
+\noindent
+\begin{tabularx}{\textwidth}{lRr}
+{#1} & {#2} & {#3}
+\end{tabularx}
+}
+
+% Command: details
+% Usage  : \details{description}
+\newcommand{\details}[1]
+{
+\noindent
+\begin{tabularx}{\textwidth}{cX}
+$\bullet$\hspace{0.3em} & {\normalsize #1}
+\end{tabularx}
+}
+ 
+% Command: technical
+% Usage  : \technical{crap1}{description of crap1}{crap2}{you get the idea}
+\newcommand{\technical}[1]
+{
+\noindent
+\begin{tabularx}{\textwidth}{X}
+{ #1 \vspace{0.1em}}
+\end{tabularx}
+}
+
+\begin{document}
+
+% % Header
+%\header{Sherri L. Malone}
+%{4832 Still Pastures Drive} {+1 (803)-481-9891} {www.LinkedIn.com/in/sherrimalone}
+%{Pocalla, SC 29150}          {SherriLMalone@inbound.plus}    {www.sherrimalone.com}
+
+\newheader{Sherri L. Malone}
+{SherriLMalone@fake.com}{www.LinkedIn.com/in/sherrim}
+{+1 (803)-481-9891}{www.sherrimalone.com}
+
+\head{Education} \vspace{-0.75em}
+
+\educ{Random College}{Bachelor of Science in Random Things}{Claremont, CA}{May 20XX}
+\threeitem{GPA: 3.88 Dean's List (all semesters)}{}{}
+\threeitem{Coursework: Computers and Programming, Writing, Philosophy, Introduction to Dance}{}{}
+\threeitem{Awards: \#1 at UCLA Hackathon, \#2 at US Berkeley Hackathon}{Galactic Math Olympiad Champion}{}
+\head{Experience} \vspace{-1.0em}
+
+\entry{Position}{Company}{City, State}{Mon 20XX-Mon 20XX}
+		\details{Lorem ipsum dolor sit amet, consectetur adipiscing elit. }
+		\details{Nunc a dolor ut arcu molestie facilisis. Nulla facilisi. In hac habitasse platea dictumst.}
+		\vspace{-0.5em}
+		
+
+\entry{Position}{Company}{City, State}{Mon 20XX-Mon 20XX}
+		\details{Lorem ipsum dolor sit amet, consectetur adipiscing elit. }
+		\details{Nunc a dolor ut arcu molestie facilisis. Nulla facilisi. In hac habitasse platea dictumst.}
+		\vspace{-0.5em}
+
+
+\entry{Position}{Company}{City, State}{Mon 20XX-Mon 20XX}
+		\details{Lorem ipsum dolor sit amet, consectetur adipiscing elit. }
+		\details{Nunc a dolor ut arcu molestie facilisis. Nulla facilisi. In hac habitasse platea dictumst.}
+		\vspace{-0.5em}
+
+
+\entry{Position}{Company}{City, State}{Mon 20XX-Mon 20XX}
+		\details{Lorem ipsum dolor sit amet, consectetur adipiscing elit. }
+		\details{Nunc a dolor ut arcu molestie facilisis. Nulla facilisi. In hac habitasse platea dictumst.}
+		\vspace{-0.5em}
+			
+
+\entry{Position}{Company}{City, State}{Mon 20XX-Mon 20XX}
+		\details{Lorem ipsum dolor sit amet, consectetur adipiscing elit}
+		\details{Nunc a dolor ut arcu molestie facilisis. Nulla facilisi. In hac habitasse platea dictumst}
+		\vspace{-0.5em}
+
+\head{Leadership}  \vspace{-0.6em}
+
+	\shortentry{Vice President}{School Organization}{Mon 20XX-Present}
+		\details{Quisque at leo scelerisque, tincidunt leo ac, malesuada felis. Integer vestibulum cursus maximus}
+		\vspace{-0.5em}
+
+	\shortentry{Vice President}{School Organization}{Mon 20XX-Present}
+		\details{Quisque at leo scelerisque, tincidunt leo ac, malesuada felis. Integer vestibulum cursus maximus}
+		\vspace{-0.5em}
+		
+	\shortentry{Vice President}{School Organization}{Mon 20XX-Present}
+		\details{Quisque at leo scelerisque, tincidunt leo ac, malesuada felis. Integer vestibulum cursus maximus}
+		\vspace{-0.5em}
+        
+\head{Awards and Honors}  \vspace{-0.6em}
+
+\shorterentry{Milikan Award for Scientific Bullshit}{Mon 20XX}
+\shorterentry{Runner-up at Random Programming Competition}{Mon 20XX}
+
+\head{Skills and Interests}  \vspace{-1.0em}
+
+\noindent {\textbf{Technical:} C/\CPP, \LaTeX, Python, MATLAB, STATA, Microsoft Excel and PowerPoint, Git/Subversion} \\
+{\textbf{Languages:} Klingon (fluent), Black Speech (Dark Tongue of Mordor)  (intermediate)} \\
+{\textbf{Interests and Causes:} The Dark Side of the Force, Climbing, Guitar, Sustainability}
+\end{document}
+%{\raisebox{.15ex}{\Large +}}	
